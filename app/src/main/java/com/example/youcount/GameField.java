@@ -2,6 +2,7 @@ package com.example.youcount;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,21 @@ import android.widget.Toast;
 public class GameField extends AppCompatActivity {
 
     TextView levelValue, scoreValue, timerValue, taskValue, answerValue;
-    Button key1, key2, key3, key4, key5, key6, key7, key8, key9, key0, keyCLS, keyMinus, keyAction;
-    View.OnClickListener onClickListener;
+    Button key1, key2, key3, key4, key5, key6, key7, key8, key9, key0, keyCLS, keyMinus, keyStart, keySend;
+    View.OnClickListener onClickListener, actionOnClickListener;
+
+    CountingTaskEngine countEngine;
 
 
     private void initializeGUI(){
+
+        actionOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view;
+                actionButtonsHandler(b.getText().toString());
+            }
+        };
 
         onClickListener = new View.OnClickListener() {
             @Override
@@ -44,7 +55,8 @@ public class GameField extends AppCompatActivity {
         key0 = findViewById(R.id.key0);
         keyCLS = findViewById(R.id.keyCLS);
         keyMinus = findViewById(R.id.keyMinus);
-        keyAction = findViewById(R.id.keyAction);
+        keyStart = findViewById(R.id.keyStart);
+        keySend = findViewById(R.id.keySendAnswer);
 
         key0.setOnClickListener(onClickListener);
         key1.setOnClickListener(onClickListener);
@@ -58,27 +70,58 @@ public class GameField extends AppCompatActivity {
         key9.setOnClickListener(onClickListener);
         keyCLS.setOnClickListener(onClickListener);
         keyMinus.setOnClickListener(onClickListener);
-        keyAction.setOnClickListener(onClickListener);
+        keyStart.setOnClickListener(actionOnClickListener);
+        keySend.setOnClickListener(actionOnClickListener);
 
     }
 
     private void userInputHandler(String input){
 
-        String answer = answerValue.getText().toString();
+        if (input.equals("CLS")) {answerValue.setText(""); return;}
 
-        if (input.equals("CLS")){
-            answerValue.setText("");
-        } else if (input.equals("-")){
-
+        if (input.equals("-")){
             if(answerValue.getText().toString().length() > 0){
-            if(answerValue.getText().toString().substring(0, 1).equals("-")){
-                answerValue.setText(answerValue.getText().toString().substring(1));
-            } else {
-                answerValue.setText("-" + answerValue.getText().toString());
+                if(answerValue.getText().toString().substring(0, 1).equals("-")){
+                    answerValue.setText(answerValue.getText().toString().substring(1));
+                } else {
+                    answerValue.setText("-" + answerValue.getText().toString());
+                }
+                return;
             }}
-        } else {
+        if(answerValue.getText().toString().length() > 6) {return;}
+
         answerValue.setText(answerValue.getText() + input);
+
+    }
+
+    private void actionButtonsHandler(String input) {
+
+        //ObjectAnimator animation = ObjectAnimator.ofFloat(keyAction, "translationX", 1000f);
+        //animation.setDuration(1000);
+       // animation.start();
+
+        if (input.equals("READY")){
+
+            String task = countEngine.getTask();
+            taskValue.setText(task);
+
+        } else if (input.equals("SEND")){
+
+            if(countEngine.checkAnswer(answerValue.getText().toString())){
+
+                Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
+                countEngine.getTask();
+
+            } else {
+
+                Toast.makeText(this, "WRONG BRUH", Toast.LENGTH_SHORT).show();
+
+            };
+
         }
+
+
+
     }
 
 
@@ -86,8 +129,10 @@ public class GameField extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
-
         initializeGUI();
+
+
+        countEngine = new CountingTaskEngine(0);
 
     }
 

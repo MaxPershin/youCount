@@ -70,7 +70,6 @@
             android:layout_height="wrap_content"
             android:background="#9A1A1A"
             android:gravity="center"
-            android:text="58 + 30"
             android:textSize="80sp" />
 
         <ProgressBar
@@ -85,15 +84,14 @@
             android:progress="50"/>
 
         <TextView
+            android:id="@+id/answerValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="80sp"
-            android:text="480"
-            android:gravity="center"
-            android:background="#AC0AD1"
             android:layout_below="@+id/progressBar"
             android:layout_marginTop="10dp"
-            android:id="@+id/answerValue"/>
+            android:background="#AC0AD1"
+            android:gravity="center"
+            android:textSize="80sp" />
 
     </RelativeLayout>
 
@@ -207,30 +205,42 @@
             android:id="@+id/keyMinus"
             android:layout_width="120dp"
             android:layout_height="75dp"
-            android:text="-"
-            android:textSize="40sp"
             android:layout_below="@id/key8"
-            android:layout_toRightOf="@+id/key0"/>
+            android:layout_toRightOf="@+id/key0"
+            android:text="-"
+            android:textSize="40sp" />
 
         <Button
             android:id="@+id/keyCLS"
             android:layout_width="120dp"
             android:layout_height="75dp"
-            android:text="CLS"
-            android:textSize="40sp"
             android:layout_below="@id/key8"
-            android:layout_toLeftOf="@+id/key0"/>
+            android:layout_toLeftOf="@+id/key0"
+            android:text="CLS"
+            android:textSize="35sp" />
 
 
         <Button
-            android:id="@+id/keyAction"
-            android:layout_width="wrap_content"
+            android:id="@+id/keyStart"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="READY"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:layout_below="@id/key0"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:id="@+id/keySendAnswer"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="SEND"
+            android:textSize="35sp"
+            android:layout_below="@id/key0"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            />
 
 
 
