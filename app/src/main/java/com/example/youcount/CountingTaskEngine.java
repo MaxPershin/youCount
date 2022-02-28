@@ -90,10 +90,14 @@ public class CountingTaskEngine {
         }
     }
 
-    public boolean checkAnswer(String userInput){
+    public Boolean compareTaskToAnswer(String userInput){
 
-        System.out.println(taskAnswer.toString());
-        System.out.println(userInput);
+        if (Integer.parseInt(userInput) == taskAnswer){ return true; }
+
+        return false;
+    }
+
+    public boolean checkAnswer(String userInput){
 
         return userInput.equals(taskAnswer.toString());
 

@@ -14,8 +14,8 @@ public class GameField extends AppCompatActivity {
     TextView levelValue, scoreValue, timerValue, taskValue, answerValue;
     Button key1, key2, key3, key4, key5, key6, key7, key8, key9, key0, keyCLS, keyMinus, keyStart, keySend;
     View.OnClickListener onClickListener, actionOnClickListener;
+    GameManager gameManager;
 
-    CountingTaskEngine countEngine;
 
 
     private void initializeGUI(){
@@ -23,8 +23,8 @@ public class GameField extends AppCompatActivity {
         actionOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button b = (Button) view;
-                actionButtonsHandler(b.getText().toString());
+                Button tempButton = (Button) view;
+                actionButtonsHandler(tempButton.getText().toString());
             }
         };
 
@@ -102,26 +102,13 @@ public class GameField extends AppCompatActivity {
 
         if (input.equals("READY")){
 
-            String task = countEngine.getTask();
-            taskValue.setText(task);
+            gameManager.start();
 
         } else if (input.equals("SEND")){
 
-            if(countEngine.checkAnswer(answerValue.getText().toString())){
-
-                Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
-                countEngine.getTask();
-
-            } else {
-
-                Toast.makeText(this, "WRONG BRUH", Toast.LENGTH_SHORT).show();
-
-            };
+            gameManager.answerInput(answerValue.getText().toString());
 
         }
-
-
-
     }
 
 
@@ -131,8 +118,7 @@ public class GameField extends AppCompatActivity {
         setContentView(R.layout.activity_game_field);
         initializeGUI();
 
-
-        countEngine = new CountingTaskEngine(0);
+        gameManager = new GameManager(this);
 
     }
 
