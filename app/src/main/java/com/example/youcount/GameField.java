@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ public class GameField extends AppCompatActivity {
     TextView levelValue, scoreValue, timerValue, taskValue, answerValue;
     Button key1, key2, key3, key4, key5, key6, key7, key8, key9, key0, keyCLS, keyMinus, keyStart, keySend;
     View.OnClickListener onClickListener, actionOnClickListener;
+    ProgressBar healthBar;
     GameManager gameManager;
 
 
@@ -37,6 +39,7 @@ public class GameField extends AppCompatActivity {
             }
         };
 
+        healthBar = findViewById(R.id.healthBar);
         levelValue = findViewById(R.id.levelValue);
         scoreValue = findViewById(R.id.scoreValue);
         timerValue = findViewById(R.id.timerValue);
@@ -102,6 +105,8 @@ public class GameField extends AppCompatActivity {
 
         if (input.equals("READY")){
 
+
+            gameManager = new GameManager(this);
             gameManager.start();
 
         } else if (input.equals("SEND")){
@@ -116,9 +121,9 @@ public class GameField extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
+
         initializeGUI();
 
-        gameManager = new GameManager(this);
 
     }
 

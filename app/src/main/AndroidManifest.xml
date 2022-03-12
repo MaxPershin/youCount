@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouCount">
         <activity
+            android:name=".GameOverScreen"
+            android:exported="false" />
+        <activity
             android:name=".GameField"
             android:exported="false" />
         <activity

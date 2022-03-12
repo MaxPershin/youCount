@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_game_field.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_game_over_screen.xml" value="0.27564102564102566" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>

@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/scoreWord"
             android:layout_centerHorizontal="true"
-            android:text="40"
+            android:text="3"
             android:textSize="30dp" />
 
         <TextView
@@ -65,13 +65,14 @@
 
 
         <ProgressBar
+            android:id="@+id/healthBar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/timerValue"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="150dp"
-            android:progress="50"
+            android:progress="100"
             android:scaleY="7" />
 
     </RelativeLayout>
